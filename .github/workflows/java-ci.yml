@@ -13,6 +13,24 @@ jobs:
   task-manager-api:
     name: Tests de l'API Spring Boot
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_DB: taskflow_test
+          POSTGRES_USER: taskflow
+          POSTGRES_PASSWORD: taskflow_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U taskflow -d taskflow_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      POSTGRES_TEST_URL: jdbc:postgresql://localhost:5432/taskflow_test
+      POSTGRES_TEST_USERNAME: taskflow
+      POSTGRES_TEST_PASSWORD: taskflow_test
     defaults:
       run:
         working-directory: projets/task-manager-api

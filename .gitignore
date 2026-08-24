@@ -1,6 +1,7 @@
 target/
 build/
 *.class
+.env
 .idea/
 .vscode/
 *.iml
