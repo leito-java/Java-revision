@@ -2,7 +2,7 @@
 
 API REST Spring Boot utilisée par le Task Manager du dépôt [`Angular-revision`](https://github.com/leito-java/Angular-revision).
 
-Lisez d'abord [Créer une API REST avec Spring Boot](../../08-ecosysteme/spring-boot-api/README.md), puis [Persister avec PostgreSQL et Flyway](../../08-ecosysteme/postgresql-flyway/README.md) et [Faire évoluer le domaine et le contrat API](../../08-ecosysteme/task-details/README.md).
+Lisez d'abord [Créer une API REST avec Spring Boot](../../08-ecosysteme/spring-boot-api/README.md), puis [Persister avec PostgreSQL et Flyway](../../08-ecosysteme/postgresql-flyway/README.md) et [Faire évoluer le domaine et le contrat API](../../08-ecosysteme/task-details/README.md). Le chapitre [Diagnostiquer un environnement local](../../08-ecosysteme/diagnostic-environnement-local/README.md) explique les vérifications Java, Maven, ports, PostgreSQL et Flyway.
 
 ## Prérequis
 
@@ -46,6 +46,19 @@ mvn spring-boot:run
 ```
 
 Sans variables, les valeurs locales du tableau sont utilisées.
+
+### Si le port 5432 est déjà occupé
+
+Le port publié par Docker et l'URL utilisée par Spring Boot doivent désigner la même instance. Par exemple, pour publier PostgreSQL sur `5433` dans PowerShell :
+
+```powershell
+$env:POSTGRES_PORT = "5433"
+$env:DB_URL = "jdbc:postgresql://localhost:5433/taskflow"
+docker compose up -d postgres
+mvn spring-boot:run
+```
+
+Dans l'invite de commandes Windows (`cmd`), utilisez `set "NOM=valeur"` à la place de `$env:NOM = "valeur"`. Ces variables ne valent que pour le terminal courant.
 
 ## Migrations
 

@@ -34,7 +34,7 @@ ressources/           # Liens, fiches mémo et glossaire
 
 Le backend du Task Manager se trouve dans [`projets/task-manager-api`](projets/task-manager-api/README.md). Il expose une API REST consommée par le dépôt Angular séparé [`Angular-revision`](https://github.com/leito-java/Angular-revision).
 
-Commencez par le chapitre [Créer une API REST avec Spring Boot](08-ecosysteme/spring-boot-api/README.md), apprenez à [persister les données avec PostgreSQL et Flyway](08-ecosysteme/postgresql-flyway/README.md), puis découvrez comment [faire évoluer le domaine et le contrat API](08-ecosysteme/task-details/README.md).
+Commencez par le chapitre [Créer une API REST avec Spring Boot](08-ecosysteme/spring-boot-api/README.md), apprenez à [persister les données avec PostgreSQL et Flyway](08-ecosysteme/postgresql-flyway/README.md), puis découvrez comment [faire évoluer le domaine et le contrat API](08-ecosysteme/task-details/README.md). Terminez l'étape full-stack par le guide [Diagnostiquer un environnement local](08-ecosysteme/diagnostic-environnement-local/README.md) afin de savoir vérifier Java, Maven, les ports et PostgreSQL comme dans un projet professionnel.
 
 ## Convention pour chaque chapitre
 
