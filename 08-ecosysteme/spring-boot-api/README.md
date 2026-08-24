@@ -1,6 +1,6 @@
 # Créer une API REST avec Spring Boot
 
-Ce chapitre utilise Java 21, Spring Boot 4.1, Maven, Spring Web MVC, Spring Data JPA, Validation et H2.
+Ce chapitre présente la première version de l'API avec Java 21, Spring Boot 4.1, Maven, Spring Web MVC, Spring Data JPA et Validation. Le projet courant utilise désormais PostgreSQL et Flyway.
 
 ## Objectif
 
@@ -11,7 +11,7 @@ requête HTTP
 → TaskController
 → TaskService
 → TaskRepository
-→ base H2
+→ base de données
 → réponse JSON
 ```
 
@@ -46,18 +46,21 @@ Une création réussie retourne `201 Created`. Une suppression réussie retourne
 
 La validation serveur est obligatoire même si Angular valide déjà les champs, car un autre programme peut appeler directement l'API.
 
-## Lancer le projet
+## Lancer le projet courant
+
+La version actuelle nécessite PostgreSQL. Suivez les commandes du [README du projet](../../projets/task-manager-api/README.md).
 
 ```powershell
 cd projets/task-manager-api
+docker compose up -d postgres
 mvn spring-boot:run
 ```
 
 - API : `http://localhost:8080/api/tasks`
 - Swagger UI : `http://localhost:8080/swagger-ui.html`
-- Console H2 : `http://localhost:8080/h2-console`
+- PostgreSQL local : `localhost:5432`
 
-H2 est en mémoire : les données disparaissent quand l'API s'arrête. PostgreSQL viendra dans l'évolution suivante.
+H2 reste utilisé uniquement par les tests rapides avec le profil `test`.
 
 ## Tester avec PowerShell
 

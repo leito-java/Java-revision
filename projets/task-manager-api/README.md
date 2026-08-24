@@ -2,7 +2,7 @@
 
 API REST Spring Boot utilisée par le Task Manager du dépôt [`Angular-revision`](https://github.com/leito-java/Angular-revision).
 
-Lisez d'abord [Créer une API REST avec Spring Boot](../../08-ecosysteme/spring-boot-api/README.md), puis [Persister avec PostgreSQL et Flyway](../../08-ecosysteme/postgresql-flyway/README.md).
+Lisez d'abord [Créer une API REST avec Spring Boot](../../08-ecosysteme/spring-boot-api/README.md), puis [Persister avec PostgreSQL et Flyway](../../08-ecosysteme/postgresql-flyway/README.md) et [Faire évoluer le domaine et le contrat API](../../08-ecosysteme/task-details/README.md).
 
 ## Prérequis
 
@@ -54,8 +54,28 @@ Flyway exécute au démarrage les scripts de `src/main/resources/db/migration`. 
 Ne modifiez pas une migration déjà appliquée. Pour chaque évolution, créez un nouveau fichier, par exemple :
 
 ```text
-V2__add_due_date_to_tasks.sql
+V3__add_category_to_tasks.sql
 ```
+
+`V1` crée la table. `V2` ajoute la description, le statut et l'échéance, transforme les anciennes valeurs `completed`, puis retire cette colonne du stockage.
+
+## Contrat des tâches
+
+Créer une tâche enrichie :
+
+```json
+{
+  "title": "Préparer la démonstration",
+  "description": "Présenter Angular et Spring Boot",
+  "priority": "high",
+  "status": "in-progress",
+  "dueDate": "2026-09-15"
+}
+```
+
+Valeurs acceptées pour `status` : `todo`, `in-progress` et `done`. Une création sans statut commence automatiquement à `todo`.
+
+Chaque réponse contient encore `completed` pour ne pas casser le frontend Angular actuel. Cette valeur est calculée depuis `status` et n'est plus stockée dans PostgreSQL.
 
 ## Tests
 

@@ -8,6 +8,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 /** Vérifie en CI que la migration Flyway est réellement compatible avec PostgreSQL. */
@@ -28,19 +30,36 @@ class PostgresMigrationIntegrationTest {
         );
 
         jdbcTemplate.update(
-                "INSERT INTO tasks (title, completed, priority) VALUES (?, ?, ?)",
+                """
+                INSERT INTO tasks (title, description, priority, status, due_date)
+                VALUES (?, ?, ?, ?, ?)
+                """,
                 "Tester la migration PostgreSQL",
-                false,
-                "HIGH"
+                "Vérifier la deuxième migration",
+                "HIGH",
+                "IN_PROGRESS",
+                LocalDate.of(2026, 9, 15)
         );
 
-        String priority = jdbcTemplate.queryForObject(
-                "SELECT priority FROM tasks WHERE title = ?",
+        String taskStatus = jdbcTemplate.queryForObject(
+                "SELECT status FROM tasks WHERE title = ?",
                 String.class,
                 "Tester la migration PostgreSQL"
         );
 
-        assertThat(successfulMigrations).isPositive();
-        assertThat(priority).isEqualTo("HIGH");
+        Long removedCompletedColumns = jdbcTemplate.queryForObject(
+                """
+                SELECT COUNT(*)
+                FROM information_schema.columns
+                WHERE table_schema = current_schema()
+                  AND table_name = 'tasks'
+                  AND column_name = 'completed'
+                """,
+                Long.class
+        );
+
+        assertThat(successfulMigrations).isEqualTo(2);
+        assertThat(taskStatus).isEqualTo("IN_PROGRESS");
+        assertThat(removedCompletedColumns).isZero();
     }
 }

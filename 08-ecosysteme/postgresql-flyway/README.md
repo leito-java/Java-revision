@@ -55,6 +55,7 @@ Flyway modifie le schéma. Hibernate vérifie seulement que les entités Java co
 | `application-dev.yml` | connexion PostgreSQL locale |
 | `application-test.yml` | base H2 isolée pour les tests rapides |
 | `V1__create_tasks.sql` | première version du schéma |
+| `V2__add_task_details.sql` | évolution compatible vers le statut et les détails |
 | `PostgresMigrationIntegrationTest` | validation réelle de Flyway en CI |
 
 ## Démarrage guidé
@@ -116,7 +117,7 @@ Dans GitHub Actions, le même build reçoit `POSTGRES_TEST_URL`. Le test Postgre
 
 ## Exercice
 
-Ajoutez une date d'échéance sans modifier `V1` : [énoncé](exercises/01-ajouter-date-echeance.md), puis [correction](solutions/01-ajouter-date-echeance.md).
+Ajoutez une catégorie sans modifier `V1` ou `V2` : [énoncé](exercises/01-ajouter-categorie.md), puis [correction](solutions/01-ajouter-categorie.md).
 
 Complétez ensuite le [quiz](quiz.md) et relisez les [erreurs fréquentes](mistakes.md).
 
