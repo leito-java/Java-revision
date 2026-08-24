@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 /** Entité persistée dans la table tasks. */
@@ -23,21 +24,40 @@ public class Task {
     @Column(nullable = false, length = 120)
     private String title;
 
-    @Column(nullable = false)
-    private boolean completed;
+    @Column(length = 1000)
+    private String description;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 10)
     private TaskPriority priority;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private TaskStatus status;
+
+    @Column(name = "due_date")
+    private LocalDate dueDate;
 
     protected Task() {
         // Constructeur requis par JPA.
     }
 
     public Task(String title, TaskPriority priority) {
+        this(title, null, priority, TaskStatus.TODO, null);
+    }
+
+    public Task(
+            String title,
+            String description,
+            TaskPriority priority,
+            TaskStatus status,
+            LocalDate dueDate
+    ) {
         this.title = Objects.requireNonNull(title);
+        this.description = description;
         this.priority = Objects.requireNonNull(priority);
-        this.completed = false;
+        this.status = Objects.requireNonNull(status);
+        this.dueDate = dueDate;
     }
 
     public Long getId() {
@@ -48,18 +68,38 @@ public class Task {
         return title;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public boolean isCompleted() {
-        return completed;
+        return status.isCompleted();
     }
 
     public TaskPriority getPriority() {
         return priority;
     }
 
+    public TaskStatus getStatus() {
+        return status;
+    }
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
     /** L'entité protège sa propre mise à jour au lieu d'exposer des setters publics. */
-    public void update(String title, TaskPriority priority, boolean completed) {
+    public void update(
+            String title,
+            String description,
+            TaskPriority priority,
+            TaskStatus status,
+            LocalDate dueDate
+    ) {
         this.title = Objects.requireNonNull(title);
+        this.description = description;
         this.priority = Objects.requireNonNull(priority);
-        this.completed = completed;
+        this.status = Objects.requireNonNull(status);
+        this.dueDate = dueDate;
     }
 }
