@@ -2,6 +2,8 @@
 
 API REST Spring Boot utilisée par le Task Manager du dépôt [`Angular-revision`](https://github.com/leito-java/Angular-revision).
 
+> Cette copie sert à apprendre et à expérimenter. La version produit maintenue pour le portfolio se trouve dans [`TaskFlow`](https://github.com/leito-java/TaskFlow).
+
 Lisez d'abord [Créer une API REST avec Spring Boot](../../08-ecosysteme/spring-boot-api/README.md), puis [Persister avec PostgreSQL et Flyway](../../08-ecosysteme/postgresql-flyway/README.md) et [Faire évoluer le domaine et le contrat API](../../08-ecosysteme/task-details/README.md). Le chapitre [Diagnostiquer un environnement local](../../08-ecosysteme/diagnostic-environnement-local/README.md) explique les vérifications Java, Maven, ports, PostgreSQL et Flyway.
 
 ## Prérequis
