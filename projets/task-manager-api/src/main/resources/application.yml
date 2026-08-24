@@ -3,17 +3,13 @@ spring:
     name: task-manager-api
   profiles:
     default: dev
-  datasource:
-    url: jdbc:h2:mem:taskflow;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    username: sa
-    password:
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      # Hibernate contrôle le schéma, mais seul Flyway a le droit de le modifier.
+      ddl-auto: validate
     open-in-view: false
-  h2:
-    console:
-      enabled: true
+  flyway:
+    enabled: true
 
 server:
   port: 8080

@@ -5,7 +5,7 @@ Cette partie transforme les connaissances Java en applications exécutables et m
 ## Parcours
 
 1. [Créer une API REST avec Spring Boot](spring-boot-api/README.md)
-2. Remplacer H2 par PostgreSQL
+2. [Persister avec PostgreSQL et Flyway](postgresql-flyway/README.md)
 3. Sécuriser l'API
 4. Construire et déployer avec Docker
 
