@@ -13,7 +13,7 @@ Un dépôt communautaire pour apprendre Java pas à pas, réviser efficacement e
 | 05 | Fichiers et dates | I/O, NIO et dates |
 | 06 | Tests | JUnit et tests unitaires |
 | 07 | Concurrence | Threads et CompletableFuture |
-| 08 | Écosystème | Maven/Gradle, Spring Boot et APIs REST |
+| 08 | [Écosystème](08-ecosysteme/README.md) | Maven, Spring Boot, API REST et persistance |
 
 ## Organisation
 
@@ -29,6 +29,12 @@ Un dépôt communautaire pour apprendre Java pas à pas, réviser efficacement e
 projets/              # Mini-projets guidés
 ressources/           # Liens, fiches mémo et glossaire
 ```
+
+## Projet full-stack
+
+Le backend du Task Manager se trouve dans [`projets/task-manager-api`](projets/task-manager-api/README.md). Il expose une API REST consommée par le dépôt Angular séparé [`Angular-revision`](https://github.com/leito-java/Angular-revision).
+
+Commencez par le chapitre [Créer une API REST avec Spring Boot](08-ecosysteme/spring-boot-api/README.md) avant de lire tout le projet.
 
 ## Convention pour chaque chapitre
 
@@ -48,10 +54,7 @@ ressources/           # Liens, fiches mémo et glossaire
 
 ## Contribuer
 
-1. Créez une branche descriptive : `docs/streams-exemples`.
-2. Ajoutez un exemple qui compile avec une explication concise.
-3. Ajoutez un exercice ou un piège courant quand c'est pertinent.
-4. Ouvrez une pull request en indiquant le niveau visé.
+Consultez le [guide de contribution](CONTRIBUTING.md) pour le workflow Git, les conventions et la Definition of Done.
 
 ## Licence
 
